@@ -1,4 +1,4 @@
-# Proyecto
+# PostBook
 
 Documentación de la aplicación PostBook.
 
@@ -21,5 +21,5 @@ Para ejecutar este proyecto se deben seguir los siguientes pasos:
 - Descargar el código.
 - Abrir el codigo en Visual Studio Code
 - Abrir la consola de comandos y ejecutar `npm install`
-- Ejecutar `npm start`
+- Ejecutar `npm serve`
 - En el navegador ir a `http://localhost:4200/`.
