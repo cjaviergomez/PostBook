@@ -41,8 +41,11 @@
 				</div>
 				<img *ngIf="publicacion.image" [src]="publicacion.image" class="img-fluid" alt="..." />
 			</div>
-			<div class="alert alert-primary mt-3 mb-3 mr-1 ml-1 text-center" role="alert" *ngIf="finalDatos">
-				No hay más publicaciones
+			<div *ngIf="finalDatos" class="alert alert-info text-center mt-3 mr-1 ml-1 mb-3 animated fadeIn faster">
+				<h4 class="alert-heading">No hay más publicaciones</h4>
+				<p>
+					<fa-icon [icon]="faExclamation" size="2x"></fa-icon>
+				</p>
 			</div>
 		</div>
 	</div>

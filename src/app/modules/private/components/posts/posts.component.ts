@@ -6,7 +6,7 @@ import { finalize, takeUntil } from 'rxjs/operators';
 declare let $: any; // Para trabajar con el modal
 
 // Iconos
-import { faSyncAlt, faPlus, faSync } from '@fortawesome/free-solid-svg-icons';
+import { faSyncAlt, faPlus, faSync, faExclamation } from '@fortawesome/free-solid-svg-icons';
 
 // Modelos
 import { User } from '../../../../core/models/user';
@@ -34,6 +34,7 @@ export class PostsComponent implements OnInit, OnDestroy {
 	faSyncAlt = faSyncAlt;
 	faPlus = faPlus;
 	faSync = faSync;
+	faExclamation = faExclamation;
 
 	// Para trabajar con la imagen
 	uploadPercent: Observable<number>;
