@@ -1,0 +1,107 @@
+<div class="contenidoMax">
+	<div class="contenido">
+		<div class="card animated fadeInLeft br-15" style="max-width: 18rem; margin: 0 auto;">
+			<form #formIngreso="ngForm" (ngSubmit)="onSubmit(formIngreso)" novalidate="" class="form-signin">
+				<h1 class="h3 font-weight-normal text-center">Iniciar sesión</h1>
+				<label for="correo" class="sr-only">Correo</label>
+				<input
+					type="email"
+					id="correo"
+					#correo="ngModel"
+					name="correo"
+					[(ngModel)]="usuario.correo"
+					[ngClass]="{ 'is-invalid': formIngreso.submitted && formIngreso.controls['correo'].errors }"
+					class="form-control"
+					placeholder="Correo"
+					required
+					autofocus
+				/>
+				<div
+					class="invalid-feedback animated fadeIn"
+					*ngIf="formIngreso.submitted && formIngreso.controls['correo'].errors"
+				>
+					Introduce un correo válido.
+				</div>
+
+				<div *ngIf="!mostrar" class="input-group mt-2">
+					<input
+						type="password"
+						id="inputPassword"
+						#inputPassword="ngModel"
+						name="password"
+						[(ngModel)]="usuario.password"
+						[ngClass]="{
+							'is-invalid':
+								formIngreso.submitted &&
+								((formIngreso.controls['password'] && formIngreso.controls['password'].errors) ||
+									(formIngreso.controls['password2'] && formIngreso.controls['password2'].errors))
+						}"
+						minlength="6"
+						maxlength="40"
+						class="form-control"
+						placeholder="Contraseña"
+						required
+					/>
+					<div class="input-group-append">
+						<a [routerLink]="" (click)="mostrarPass(true)" class="input-group-text"
+							><fa-icon [icon]="faEye"></fa-icon
+						></a>
+					</div>
+					<div
+						class="invalid-feedback animated fadeIn"
+						*ngIf="
+							formIngreso.submitted &&
+							((formIngreso.controls['password'] && formIngreso.controls['password'].errors) ||
+								(formIngreso.controls['password2'] && formIngreso.controls['password2'].errors))
+						"
+					>
+						Introduce al menos 6 caracteres.
+					</div>
+				</div>
+
+				<div *ngIf="mostrar" class="input-group mt-2">
+					<input
+						type="text"
+						id="inputPassword2"
+						#inputPassword2="ngModel"
+						name="password2"
+						[(ngModel)]="usuario.password"
+						[ngClass]="{
+							'is-invalid':
+								formIngreso.submitted &&
+								((formIngreso.controls['password'] && formIngreso.controls['password'].errors) ||
+									(formIngreso.controls['password2'] && formIngreso.controls['password2'].errors))
+						}"
+						minlength="6"
+						maxlength="40"
+						class="form-control"
+						placeholder="Contraseña"
+						required
+					/>
+					<div class="input-group-append">
+						<a [routerLink]="" (click)="mostrarPass(false)" class="input-group-text"
+							><fa-icon [icon]="faEyeSlash"></fa-icon
+						></a>
+					</div>
+					<div
+						class="invalid-feedback animated fadeIn"
+						*ngIf="
+							formIngreso.submitted &&
+							((formIngreso.controls['password'] && formIngreso.controls['password'].errors) ||
+								(formIngreso.controls['password2'] && formIngreso.controls['password2'].errors))
+						"
+					>
+						Introduce al menos 6 caracteres.
+					</div>
+				</div>
+
+				<button class="btn btn-lg btn-primary btn-block mt-2" type="submit">Ingresar</button>
+				<div class="container">
+					<div class="mt-2">
+						<a routerLink="/modOut/registro" class="row justify-content-md-center">¿No tienes cuenta?</a>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

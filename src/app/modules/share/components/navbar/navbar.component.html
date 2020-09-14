@@ -1,0 +1,77 @@
+<!--Menú para usuarios no logueados-->
+<div *ngIf="!islogged; else logueado">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<a class="navbar-brand" href="">
+			<img
+				src="../../../../../assets/img/logo.svg"
+				width="30"
+				height="30"
+				class="d-inline-block align-top"
+				alt=""
+				loading="lazy"
+			/>
+			{{ titleApp }}
+		</a>
+		<button
+			class="navbar-toggler"
+			type="button"
+			data-toggle="collapse"
+			data-target="#navbarText"
+			aria-controls="navbarText"
+			aria-expanded="false"
+			aria-label="Toggle navigation"
+		>
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarText">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item">
+					<a class="nav-link" [routerLink]="['/modOut/inicio']" [routerLinkActive]="['activado']">Inicio</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+</div>
+
+<!--Menú para usuarios logueados-->
+<ng-template #logueado>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<a class="navbar-brand" href="">
+			<img
+				src="../../../../../assets/img/logo.svg"
+				width="30"
+				height="30"
+				class="d-inline-block align-top"
+				alt=""
+				loading="lazy"
+			/>
+			{{ titleApp }}
+		</a>
+		<button
+			class="navbar-toggler"
+			type="button"
+			data-toggle="collapse"
+			data-target="#navbarText2"
+			aria-controls="navbarText2"
+			aria-expanded="false"
+			aria-label="Toggle navigation"
+		>
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarText">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item">
+					<a class="nav-link" [routerLink]="['/modPrivate/posts']" [routerLinkActive]="['activado']"
+						>Publicaciones</a
+					>
+				</li>
+			</ul>
+			<span class="navbar-text m-0 p-0">
+				<button (click)="salir()" type="button" class="btn btn-outline-primary btn-sm mr-2">
+					Salir
+				</button>
+			</span>
+		</div>
+	</nav>
+</ng-template>

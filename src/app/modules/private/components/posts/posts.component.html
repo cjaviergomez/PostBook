@@ -1,0 +1,182 @@
+<div class="container" *ngIf="!cargando" infiniteScroll [infiniteScrollDistance]="2" (scrolled)="onScroll()">
+	<div class="row">
+		<div class="col-3">
+			<div class="card text-center m-1">
+				<div class="mt-2">
+					<img
+						src="../../../../../assets/img/profile.png"
+						class="rounded-circle img-fluid"
+						alt="profile"
+						style="max-width: 40%; max-height: 300px;"
+					/>
+				</div>
+				<span class="m-3">{{ usuario.correo }}</span>
+				<button
+					type="button"
+					class="btn btn-primary"
+					data-toggle="modal"
+					data-target="#publicacionModal"
+					data-whatever="@getbootstrap"
+				>
+					<fa-icon [icon]="faPlus" title="Publicar"></fa-icon>
+					Publicar
+				</button>
+			</div>
+		</div>
+		<div class="col-9">
+			<div *ngIf="publicacionesLocal.length > 0">
+				<div class="card m-1" *ngFor="let publicacion of publicacionesLocal">
+					<div class="card-body">
+						<h5 class="card-title">{{ publicacion.name }}</h5>
+						<p class="card-text">{{ publicacion.description }}</p>
+					</div>
+					<img *ngIf="publicacion.image" [src]="publicacion.image" class="img-fluid" alt="..." />
+				</div>
+			</div>
+
+			<div class="card m-1" *ngFor="let publicacion of publicaciones">
+				<div class="card-body">
+					<h5 class="card-title">{{ publicacion.name }}</h5>
+					<p class="card-text">{{ publicacion.description }}</p>
+				</div>
+				<img *ngIf="publicacion.image" [src]="publicacion.image" class="img-fluid" alt="..." />
+			</div>
+			<div class="alert alert-primary mt-3 mb-3 mr-1 ml-1 text-center" role="alert" *ngIf="finalDatos">
+				No hay más publicaciones
+			</div>
+		</div>
+	</div>
+</div>
+
+<div *ngIf="cargando" class="alert alert-info text-center mt-3 animated fadeIn faster container">
+	<h4 class="alert-heading">Cargando</h4>
+	<p>
+		<fa-icon [icon]="faSyncAlt" [spin]="true" size="2x"></fa-icon>
+	</p>
+	<p class="mb-0">
+		Espere por favor
+	</p>
+</div>
+
+<!--Modal publicación-->
+<div
+	class="modal fade"
+	id="publicacionModal"
+	tabindex="-1"
+	role="dialog"
+	aria-labelledby="exampleModalLabel"
+	aria-hidden="true"
+>
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel1">Publicar</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form
+					#formRegistro="ngForm"
+					(ngSubmit)="guardarPublicacion(formRegistro)"
+					novalidate=""
+					class="form-signin"
+				>
+					<div class="form-group">
+						<input
+							type="text"
+							class="form-control"
+							#titulo="ngModel"
+							[(ngModel)]="publicacion.name"
+							id="titulo"
+							minlength="1"
+							maxlength="40"
+							required
+							placeholder="Titulo"
+							name="titulo"
+							[ngClass]="{ 'is-invalid': formRegistro.submitted && formRegistro.controls['titulo'].errors }"
+						/>
+						<div
+							class="invalid-feedback animated fadeIn"
+							*ngIf="formRegistro.submitted && formRegistro.controls['titulo'].errors"
+						>
+							Introduce un nombre válido.
+						</div>
+					</div>
+					<div class="form-group">
+						<textarea
+							class="form-control"
+							[(ngModel)]="publicacion.description"
+							#descripcion="ngModel"
+							id="descripcion"
+							minlength="10"
+							maxlength="100"
+							id="validationTextarea"
+							name="descripcion"
+							placeholder="Descripción"
+							required
+							[ngClass]="{
+								'is-invalid': formRegistro.submitted && formRegistro.controls['descripcion'].errors
+							}"
+						></textarea>
+
+						<div
+							class="invalid-feedback animated fadeIn"
+							*ngIf="formRegistro.submitted && formRegistro.controls['descripcion'].errors"
+						>
+							Introduce una descripción válida.
+						</div>
+					</div>
+
+					<div class="input-group mt-3">
+						<div class="custom-file">
+							<input
+								type="file"
+								id="imagen"
+								class="custom-file-input"
+								id="inputGroupFile04"
+								accept=".png, .jpg"
+								(change)="onUpload($event)"
+								aria-describedby="inputGroupFileAddon04"
+								name="imagen"
+							/>
+							<label
+								*ngIf="nameImageUp"
+								class="custom-file-label"
+								for="inputGroupFile04"
+								data-browse="Elegir"
+								>{{ nameImageUp }}</label
+							>
+							<label
+								*ngIf="!nameImageUp"
+								class="custom-file-label"
+								for="inputGroupFile04"
+								data-browse="Elegir"
+								>Elija una imagen</label
+							>
+						</div>
+					</div>
+
+					<div *ngIf="nameImageUp" class="progress">
+						<div
+							class="progress-bar progress-bar-striped bg-primary"
+							role="progressbar"
+							[style.width]="(uploadPercent | async) + '%'"
+						>
+							{{ uploadPercent | async | number: '1.0-0' }}%
+						</div>
+					</div>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" (click)="cerrarModal(formRegistro)">
+							Cerrar
+						</button>
+						<button type="submit" class="btn btn-primary">
+							Publicar
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

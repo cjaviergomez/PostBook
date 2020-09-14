@@ -1,0 +1,12 @@
+.titulo {
+	font: 350% sans-serif;
+}
+
+.texto {
+	font-size: 20px;
+}
+
+.contenidoMax {
+	height: 85vh;
+	position: relative;
+}
