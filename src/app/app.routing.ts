@@ -11,7 +11,7 @@ const appRoutes: Routes = [
 		path: 'modPrivate',
 		loadChildren: () => import('./modules/private/private.module').then((m) => m.PrivateModule)
 	},
-	{ path: '**', redirectTo: 'modOut', pathMatch: 'full' } // IMPORTANTE: Esta ruta debe ser la última que se declare, si se declara una ruta despues de esta, siempre va a tomar esta.
+	{ path: '**', redirectTo: 'modOut' } // IMPORTANTE: Esta ruta debe ser la última que se declare, si se declara una ruta despues de esta, siempre va a tomar esta.
 ];
 
 export const appRoutingProviders: any[] = [];

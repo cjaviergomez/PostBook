@@ -60,7 +60,6 @@ export class PostsComponent implements OnInit, OnDestroy {
 			.pipe(takeUntil(this.ngUnsubscribe))
 			.subscribe((user) => {
 				if (user) {
-					console.log(user);
 					this.usuario.correo = user.email;
 					if (user.displayName) {
 						this.usuario.nombre = user.displayName;
@@ -72,6 +71,9 @@ export class PostsComponent implements OnInit, OnDestroy {
 			});
 	}
 
+	/**
+	 * Método para obtener las publicaciones de la API
+	 */
 	obtenerPublicaciones(): void {
 		this.cargando = true;
 		this.publicacionService.obtenerProductos(this.paginaActual).subscribe((data: any) => {
@@ -88,7 +90,6 @@ export class PostsComponent implements OnInit, OnDestroy {
 	 * @param form Formulario con la información de la nueva publicación.
 	 */
 	guardarPublicacion(form: NgForm): void {
-		console.log(this.publicacion);
 		if (form.invalid) {
 			return;
 		} else {
@@ -140,11 +141,17 @@ export class PostsComponent implements OnInit, OnDestroy {
 			.subscribe();
 	}
 
+	/**
+	 * Método para almacenar las publicaciones en el LocalStorage.
+	 */
 	guardarEnLocal() {
 		localStorage.setItem('publicaciones', JSON.stringify(this.publicacionesLocal));
 		this.obtenerPublicacionesLocal();
 	}
 
+	/**
+	 * Método para obtener las publicaciones del LocalStorage
+	 */
 	obtenerPublicacionesLocal() {
 		const data = JSON.parse(localStorage.getItem('publicaciones'));
 		if (data) {
@@ -154,6 +161,9 @@ export class PostsComponent implements OnInit, OnDestroy {
 		}
 	}
 
+	/**
+	 * Método que se lanza al hacer scroll
+	 */
 	onScroll(): void {
 		if (this.paginaActual < this.paginaFinal) {
 			this.siguientePagina();
@@ -162,6 +172,9 @@ export class PostsComponent implements OnInit, OnDestroy {
 		}
 	}
 
+	/**
+	 * Método para obtener los datos de la siguiente página usando el scroll infinito.
+	 */
 	siguientePagina(): void {
 		this.paginaActual++;
 		this.publicacionService.obtenerProductos(this.paginaActual).subscribe((data: any) => {
@@ -169,6 +182,14 @@ export class PostsComponent implements OnInit, OnDestroy {
 				this.publicaciones.push(publicacion);
 			});
 		});
+	}
+
+	/**
+	 * Método para validar que la url de la imagen corresponda realmente a una imagen.
+	 * @param event evento disparado al ocurrir el error.
+	 */
+	errorHandler(event) {
+		event.target.src = 'https://cdn.browshot.com/static/images/not-found.png';
 	}
 
 	/**
