@@ -60,7 +60,14 @@ export class PostsComponent implements OnInit, OnDestroy {
 			.pipe(takeUntil(this.ngUnsubscribe))
 			.subscribe((user) => {
 				if (user) {
+					console.log(user);
 					this.usuario.correo = user.email;
+					if (user.displayName) {
+						this.usuario.nombre = user.displayName;
+					}
+					if (user.photoURL) {
+						this.usuario.foto = user.photoURL;
+					}
 				}
 			});
 	}

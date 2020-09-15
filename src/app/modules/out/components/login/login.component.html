@@ -2,7 +2,14 @@
 	<div class="contenido">
 		<div class="card animated fadeInLeft br-15" style="max-width: 18rem; margin: 0 auto;">
 			<form #formIngreso="ngForm" (ngSubmit)="onSubmit(formIngreso)" novalidate="" class="form-signin">
-				<h1 class="h3 font-weight-normal text-center">Iniciar sesión</h1>
+				<h1 class="h3 font-weight-normal text-center">Inicia sesión</h1>
+				<button type="button" class="btn btn-block google mt-2" (click)="ingresar('google')">
+					<fa-icon [icon]="faGlobe"></fa-icon> Google
+				</button>
+
+				<button type="button" class="btn btn-block mb-2 twitter" (click)="ingresar('twitter')">
+					<fa-icon [icon]="faDove"></fa-icon> Twitter
+				</button>
 				<label for="correo" class="sr-only">Correo</label>
 				<input
 					type="email"
@@ -96,6 +103,7 @@
 				</div>
 
 				<button class="btn btn-lg btn-primary btn-block mt-2" type="submit">Ingresar</button>
+
 				<div class="container">
 					<div class="mt-2">
 						<a routerLink="/modOut/registro" class="row justify-content-md-center">¿No tienes cuenta?</a>

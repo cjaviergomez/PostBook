@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 
 // Iconos de Fontawesome
-import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
+import { faEyeSlash, faEye, faGlobe, faDove } from '@fortawesome/free-solid-svg-icons';
 
 // Modelos
 import { User } from '../../../../core/models/user';
@@ -23,6 +23,8 @@ export class LoginComponent implements OnInit {
 	// Iconos
 	faEyeSlash = faEyeSlash;
 	faEye = faEye;
+	faDove = faDove;
+	faGlobe = faGlobe;
 
 	usuario: User = new User();
 
@@ -60,5 +62,17 @@ export class LoginComponent implements OnInit {
 	 */
 	mostrarPass(valor: boolean): void {
 		this.mostrar = valor;
+	}
+
+	ingresar(redSocial: string) {
+		this.authService
+			.loginSocial(redSocial)
+			.then((resp: any) => {
+				this.router.navigateByUrl('/modPrivate/posts');
+			})
+			.catch((err) => {
+				console.log('error desde login', err);
+				this.swal.showErrorMessage(err.code);
+			});
 	}
 }

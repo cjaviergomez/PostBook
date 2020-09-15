@@ -8,9 +8,19 @@
 						class="rounded-circle img-fluid"
 						alt="profile"
 						style="max-width: 40%; max-height: 300px;"
+						*ngIf="!usuario.foto; else usuarioConFoto"
 					/>
+					<ng-template #usuarioConFoto>
+						<img
+							[src]="usuario.foto"
+							class="rounded-circle img-fluid"
+							alt="profile"
+							style="max-width: 40%; max-height: 300px;"
+						/>
+					</ng-template>
 				</div>
-				<span class="m-3">{{ usuario.correo }}</span>
+				<span class="mt-3" *ngIf="usuario.nombre">{{ usuario.nombre }}</span>
+				<span class="mb-3">{{ usuario.correo }}</span>
 				<button
 					type="button"
 					class="btn btn-primary"

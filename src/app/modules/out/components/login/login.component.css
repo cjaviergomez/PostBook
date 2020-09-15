@@ -95,3 +95,13 @@ a {
 	height: 85vh;
 	position: relative;
 }
+
+.twitter {
+	background-color: #00a2f3;
+	color: white;
+}
+
+.google {
+	background-color: whitesmoke;
+	color: black;
+}

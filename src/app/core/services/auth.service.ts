@@ -3,6 +3,7 @@ import { map } from 'rxjs/operators';
 
 // Para trabajar con AngularFire2
 import { AngularFireAuth } from '@angular/fire/auth';
+import * as firebase from 'firebase';
 
 // Models
 import { User } from '../models/user';
@@ -33,6 +34,14 @@ export class AuthService {
 				(err) => reject(err)
 			);
 		});
+	}
+
+	loginSocial(proveedor: string) {
+		if (proveedor === 'google') {
+			return this.afsAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+		} else {
+			return this.afsAuth.auth.signInWithPopup(new firebase.auth.TwitterAuthProvider());
+		}
 	}
 
 	// Metodo para 'cerrar la sessión' de un User
