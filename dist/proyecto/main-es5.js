@@ -465,7 +465,7 @@
                     path: 'modPrivate',
                     loadChildren: function () { return Promise.all(/*! import() | modules-private-private-module */ [__webpack_require__.e("default~modules-out-out-module~modules-private-private-module"), __webpack_require__.e("modules-private-private-module")]).then(__webpack_require__.bind(null, /*! ./modules/private/private.module */ "./src/app/modules/private/private.module.ts")).then(function (m) { return m.PrivateModule; }); }
                 },
-                { path: '**', redirectTo: 'modOut', pathMatch: 'full' } // IMPORTANTE: Esta ruta debe ser la última que se declare, si se declara una ruta despues de esta, siempre va a tomar esta.
+                { path: '**', redirectTo: 'modOut' } // IMPORTANTE: Esta ruta debe ser la última que se declare, si se declara una ruta despues de esta, siempre va a tomar esta.
             ];
             var appRoutingProviders = [];
             var routing = _angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"].forRoot(appRoutes);
